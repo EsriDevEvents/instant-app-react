@@ -10,6 +10,7 @@ import MapView from "@arcgis/core/views/MapView";
 
 interface ViewProps {
   base: ApplicationBase;
+  updateView(view: __esri.MapView): void;
 }
 
 interface ViewState {
@@ -23,8 +24,9 @@ const CSS = {
 class View extends Component<ViewProps, ViewState> {
   mapDiv = createRef() as React.RefObject<HTMLDivElement>;
 
-  componentDidMount() {
-    this.createView();
+  async componentDidMount() {
+    const view = await this.createView();
+    this.props.updateView(view);
   }
 
   render() {
@@ -64,4 +66,16 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, null)(View);
+function mapDispatchToProps(
+  dispatch
+): {
+  updateView: (updateView: __esri.MapView) => void;
+} {
+  return {
+    updateView: (view: __esri.MapView) => {
+      dispatch({ type: "UPDATE_VIEW", payload: view });
+    }
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(View);

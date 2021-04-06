@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Header from "./Components/Header/Header";
 import View from "./Components/View/View";
 import Modal from "./Components/Modal/Modal";
+import Example from "./Components/Example/Example";
 
 import "./App.scss";
 import { ApplicationConfig } from "./ApplicationBase/interfaces";
@@ -26,6 +27,7 @@ class App extends Component<AppProps, AppState> {
         <Header />
         <View />
         <Modal />
+        <Example />
       </div>
     );
   }

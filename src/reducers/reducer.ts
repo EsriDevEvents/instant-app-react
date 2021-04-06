@@ -5,6 +5,11 @@ function reducer(state, action) {
         ...state,
         title: action.payload
       };
+    case "UPDATE_VIEW":
+      return {
+        ...state,
+        view: action.payload
+      };
     default:
       return state;
   }
